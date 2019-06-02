@@ -23,6 +23,18 @@
   color: #61dafb;
 }
 
+.poster {
+  width: 5vw;
+  height: 5vh;
+}
+
+.movie-suggestion-list-item {
+  border: 1vw solid #000;
+  border-radius: 1vw;
+  color: #000;
+  /* background-color: #777777; */
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
