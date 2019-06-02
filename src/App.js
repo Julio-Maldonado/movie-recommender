@@ -8,31 +8,26 @@ let compare = (a, b) => {
 
 const Suggestions = (props) => {
   const options = props.results.map(movie => (
-    <li key={movie.imdbID}>
-      <div 
+      <div
         className="movie-suggestion-list-item"
         onClick={() => props.onMovieSuggestionPress(movie)}
       >
         <img className="poster" src={movie.Poster} alt="No pic available" />
         {movie.Title}
       </div>
-    </li>
   ))
-  return <ul>{options}</ul>
+  return options
 }
 
 class App extends Component {
   state = {
     query: '',
-    results: []
+    movies: []
   }
-
-  results = []
-  resultsSize = 0
-  count = 0
 
   onMovieSuggestionPress = (movie) => {
     console.log('movie pressed', movie)
+    search(movie, this.state.movies)
   }
 
   handleInputChange = () => {
@@ -48,17 +43,21 @@ class App extends Component {
               }
             })
             suggestedMovies = suggestedMovies.sort(compare)
-            console.log(suggestedMovies)
-            this.setState({results: suggestedMovies})
+            if (suggestedMovies.length > 5)
+              suggestedMovies = suggestedMovies.slice(0,5)
+            this.setState({movies: suggestedMovies})
           }
         }
       })
-    // this.search()
   }
  
   render() {
     return (
       <div className="App">
+        <h1 onClass="title">
+          
+          Search for a movie, click on the movie, then watch similar movies :) 
+        </h1>
         <input
           className="movie-input"
           placeholder="Search for..."
@@ -67,7 +66,7 @@ class App extends Component {
         />
         <Suggestions
           onMovieSuggestionPress={this.onMovieSuggestionPress}
-          results={this.state.results} />
+          results={this.state.movies} />
       </div>
     )
   }
@@ -116,117 +115,121 @@ class App extends Component {
 }
 */
 
-/*
+let results = []
+let resultsSize = 0
+let count = 0
 
-  cos = (query, doc) => {
-    let keys1 = query.toLowerCase().split(' ')
-    let keys2 = doc["Plot"].toLowerCase().split(' ')
+let cos = (query, doc) => {
+  let keys1 = query.toLowerCase().split(' ')
+  let keys2 = doc["Plot"].toLowerCase().split(' ')
 
-    let wordFreqQ = {}
-    for (let i in keys1)
-      wordFreqQ[i] = 0
-    for (let i in keys1)
-      wordFreqQ[i] += 1
+  let wordFreqQ = {}
+  for (let i in keys1)
+    wordFreqQ[i] = 0
+  for (let i in keys1)
+    wordFreqQ[i] += 1
 
-    let wordFreqD = {}
-    for (let i in keys2)
-      wordFreqD[i] = 0
-    for (let i in keys2)
-      wordFreqD[i] += 1
-    let intersectionKeys = keys1.filter(value => -1 !== keys2.indexOf(value))
-    let dotProduct = 0
-    let magnitude1 = 0
-    let magnitude2 = 0
-    let i
-    for (i in intersectionKeys)
-      dotProduct += wordFreqQ[i] * wordFreqD[i]
-    
-    for (i in keys1)
-      magnitude1 += Math.pow(wordFreqQ[i], 2)
-    magnitude1 = Math.sqrt(magnitude1)
-    for (i in keys2)
-      magnitude2 += Math.pow(wordFreqD[i], 2)
-    magnitude2 = Math.sqrt(magnitude2)
-    
-    let magnitude = magnitude1 * magnitude2
-    return dotProduct / magnitude
-  }
+  let wordFreqD = {}
+  for (let i in keys2)
+    wordFreqD[i] = 0
+  for (let i in keys2)
+    wordFreqD[i] += 1
+  let intersectionKeys = keys1.filter(value => -1 !== keys2.indexOf(value))
+  let dotProduct = 0
+  let magnitude1 = 0
+  let magnitude2 = 0
+  let i
+  for (i in intersectionKeys)
+    dotProduct += wordFreqQ[i] * wordFreqD[i]
+  
+  for (i in keys1)
+    magnitude1 += Math.pow(wordFreqQ[i], 2)
+  magnitude1 = Math.sqrt(magnitude1)
+  for (i in keys2)
+    magnitude2 += Math.pow(wordFreqD[i], 2)
+  magnitude2 = Math.sqrt(magnitude2)
+  
+  let magnitude = magnitude1 * magnitude2
+  return dotProduct / magnitude
+}
 
-  top10 = (jsonResults) => {
-    let topCount = 0
-    let topUrl = ''
-    let topTen = {}
-    let topTenList = []
-    this.resultsSize = Object.keys(jsonResults).length
-    // for (let i = 0; i < resultsSize; i++) {
-    for (let i = 0; i < 10; i++) {
-      for (let j in jsonResults) {
-        if (jsonResults[j] > topCount && !(j in topTen)) {
-          topUrl = j
-          topCount = jsonResults[j]
-        }
+let top10 = (jsonResults) => {
+  let topCount = 0
+  let topUrl = ''
+  let topTen = {}
+  let topTenList = []
+  resultsSize = Object.keys(jsonResults).length
+  // for (let i = 0; i < resultsSize; i++) {
+  for (let i = 0; i < 10; i++) {
+    for (let j in jsonResults) {
+      if (jsonResults[j] > topCount && !(j in topTen)) {
+        topUrl = j
+        topCount = jsonResults[j]
       }
-      topTen[topUrl] = topCount
-      topCount = 0
-      topTenList.push(topUrl)
     }
-    return topTenList
+    topTen[topUrl] = topCount
+    topCount = 0
+    topTenList.push(topUrl)
   }
+  return topTenList
+}
 
-  search = () => {
-        // let events = response.json()
-        console.log(movies)
-        let jsonResults = {}
-        let query = this.state.query
-        movies.forEach((movie, i) => {
-          jsonResults[movie.Title] = this.cos(query, movie)
-        })
-        // $.each(events,function(i,event){
-        //     jsonResults[event.eventbrite_url] = cos(query, event)
-        // });
-        jsonResults = this.top10(jsonResults)
-        let arr = []
-        for (let i = 0; i< jsonResults.length; i++) {
-          let eventData = {}
-          for (let j = 0; j < movies.length; j++){
-            if (movies[j].Title === jsonResults[i]) {
-              eventData = {
-                url: movies[j].Website, 
-                name: movies[j].Title, 
-                description: movies[j].Plot,
-                image: (movies[j].Poster ? movies[j].Poster : '/image_unavailable.jpeg')
-              }
-              break
-            }
-          }
-          arr.push(eventData)
+let search = (movie, movies) => {
+  // let events = response.json()
+  // console.log(movies)
+  let jsonResults = {}
+  // query is currently the plot... update to pass in movie object and use various metrics for comparison
+  let query = movie["Plot"]
+  movies.forEach((movie, i) => {
+    jsonResults[movie.Title] = cos(query, movie)
+  })
+  // $.each(events,function(i,event){
+  //     jsonResults[event.eventbrite_url] = cos(query, event)
+  // });
+  jsonResults = top10(jsonResults)
+  let arr = []
+  for (let i = 0; i< jsonResults.length; i++) {
+    let movieData = {}
+    for (let j = 0; j < movies.length; j++){
+      if (movies[j].Title === jsonResults[i]) {
+        movieData = {
+          url: movies[j].Website, 
+          name: movies[j].Title, 
+          description: movies[j].Plot,
+          image: (movies[j].Poster ? movies[j].Poster : '/image_unavailable.jpeg')
         }
-        var photo = ''
-        var desc = ''
-        var title = ''
-        var link = ''
-        let arrPhoto = []
-        let arrDesc = []
-        let arrTitle = []
-        let arrLink = []
-        for(let i = 0; i < arr.length; i++) {
-          // change out var to now be onclick to change to div id singleResult
-          // photo += '<img src="' + arr[i].image +  'width="107"' + ' height="98"' + '">' + '<br>';
-          photo = arr[i].image;
-           // photo += '"url(' + arr[i].image + ')"';
-          arrPhoto.push(photo); 
-          // variables for new page once link is clicked
-          title = arr[i].name;
-          arrTitle.push(title);
-          // document.getElementById("resultsTitle").innerText = title;
-          desc = arr[i].description;
-          arrDesc.push(desc);
-          // document.getElementById("resultsText").innerText = desc;
-          link = '<a href="' + arr[i].url + '"> For more info or to buy your tickets </a><br>';
-          arrLink.push(link);
-          // document.getElementById("results").innerHTML = link;
-        }
+        break
+      }
     }
-*/
+    arr.push(movieData)
+  }
+  console.log(arr)
+  var photo = ''
+  var desc = ''
+  var title = ''
+  var link = ''
+  let arrPhoto = []
+  let arrDesc = []
+  let arrTitle = []
+  let arrLink = []
+  for(let i = 0; i < arr.length; i++) {
+    // change out var to now be onclick to change to div id singleResult
+    // photo += '<img src="' + arr[i].image +  'width="107"' + ' height="98"' + '">' + '<br>';
+    photo = arr[i].image;
+      // photo += '"url(' + arr[i].image + ')"';
+    arrPhoto.push(photo); 
+    // variables for new page once link is clicked
+    title = arr[i].name;
+    arrTitle.push(title);
+    // document.getElementById("resultsTitle").innerText = title;
+    desc = arr[i].description;
+    arrDesc.push(desc);
+    // document.getElementById("resultsText").innerText = desc;
+    link = '<a href="' + arr[i].url + '"> For more info or to buy your tickets </a><br>';
+    arrLink.push(link);
+    // document.getElementById("results").innerHTML = link;
+  }
+}
+
 
 export default App;
