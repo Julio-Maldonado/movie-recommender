@@ -39,26 +39,148 @@
 
 .poster {
   width: 5vw;
-  height: 5vh;
-  text-align: 'left';
+  height: 11vh;
+  margin: auto;
+  margin-top: 0.5vh;
+}
+
+.suggestion-text {
+  margin-left: 8vw;
+  vertical-align: middle;
+  display: inline-block;
+  position: relative;
+  margin-top: -10vh; 
+}
+
+@media only screen and (max-width: 700px) {
+  .poster {
+    width: 8vw;
+    height: 9vh;
+    margin: auto;
+    display: inline-block;
+    margin-top: 1.5vh;
+  }
+
+  .suggestion-text {
+    /* margin-left: 8vw; */
+    /* vertical-align: middle; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    text-align: center;
+    margin-left: 2vw;
+    width: 42vw;
+    vertical-align: middle;
+    display: inline-block;
+    position: relative;
+    margin-top: -7vh;
+  }
+}
+
+.movie-suggestion-list-item {
+  border: 0.1vw solid lightgrey;
+  margin-bottom: 0.2vh;
+  width: 61.5vw;
+  margin-left: 18.5vw;
+  text-align: left;
+  padding-left: 1vw;
+  color: whitesmoke;
+  height: 12vh;
+  overflow: auto;
+  vertical-align: middle;
+}
+
+.suggestion {
+  /* display: inline-block; */
+  
 }
 
 .movie-input {
   width: 50vw;
+  height: 3vh;
+  font-size: 2.5vh;
 }
 
-.movie-suggestion-list-item {
-  border: 0.1vw solid black;
-  margin-bottom: 0.2vh;
-  width: 50vw;
-  margin-top: 0;
-  margin-left: 25vw;
-  text-align: left;
-  padding-left: 1vw;
-  /* justify-content: center; */
-  align-items: center;
-  color: whitesmoke;
+.search-button {
+  margin: auto;
+  margin-left: 1vw;
+  height: 3.5vh;
+  font-size: 2vh;
+}
 
+.movie-recommendation-list-row {
+  width: 90vw;
+  text-align: left;
+  flex-direction: row;
+  margin-left: 8vw;
+  margin-top: 1vh;
+  /* width: 0vw; */
+}
+
+.movie-recommendation-list-item {
+  width: 27vw;
+  margin-right: 1vw;
+  border: 0.1vw solid lightgrey;
+  color: white;
+  flex-direction: row;
+  display: inline-block;
+  padding-left: .5vw;
+  height: 20vh;
+  overflow: auto;
+  vertical-align: middle;
+}
+
+.recommendation-name {
+  display: inline-block;
+  margin-top: -12vh;
+  position: relative;
+  margin-left: 1vw;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.recommendation-rating {
+  display: inline-block;
+  margin-top: -10vh;
+  position: relative;
+  margin-left: 6vw;
+
+  vertical-align: middle;
+}
+
+.recommendation-length {
+  display: inline-block;
+  margin-top: -10vh;
+  position: relative;
+  margin-left: 12vw;
+
+  vertical-align: middle;
+}
+
+.recommendation-rated {
+  display: inline-block;
+  margin-top: -5vh;
+  position: absolute;
+  margin-left: 20vw;
+  /* margin-right: 0vw; */
+
+  vertical-align: middle;
+}
+
+.recommendation-year {
+  display: inline-block;
+  margin-top: -8vh;
+  position: relative;
+  margin-left: 6vw;
+  vertical-align: middle;
+}
+
+.recommendation-plot {
+  display: inline-block;
+  margin-top: -5vh;
+  position: relative;
+  margin-left: 0vw;
+  width: 26vw;
+  vertical-align: middle;
 }
 
 @keyframes App-logo-spin {
