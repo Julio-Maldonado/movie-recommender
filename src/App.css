@@ -7,91 +7,37 @@
   margin: 0px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
 .title {
   padding-top: 1vh;
   padding-bottom: 1vh;
-  margin: 0px;
+  margin: 0;
   margin-bottom: 5vh;
   background: black;
   color: white;
 }
 
-.poster {
-  width: 5vw;
-  height: 11vh;
-  margin: auto;
-  margin-top: 0.5vh;
-}
-
 .suggestion-text {
-  margin-left: 8vw;
+  text-align: left;
+  margin-left: 10vw;
+  width: 42vw;
   vertical-align: middle;
-  display: inline-block;
   position: relative;
-  margin-top: -10vh; 
-}
-
-@media only screen and (max-width: 700px) {
-  .poster {
-    width: 8vw;
-    height: 9vh;
-    margin: auto;
-    display: inline-block;
-    margin-top: 1.5vh;
-  }
-
-  .suggestion-text {
-    /* margin-left: 8vw; */
-    /* vertical-align: middle; */
-    /* align-items: center; */
-    /* justify-content: center; */
-    text-align: center;
-    margin-left: 2vw;
-    width: 42vw;
-    vertical-align: middle;
-    display: inline-block;
-    position: relative;
-    margin-top: -7vh;
-  }
+  margin-top: -10vh;
 }
 
 .movie-suggestion-list-item {
   border: 0.1vw solid lightgrey;
   margin-bottom: 0.2vh;
+  margin-top: 0.1vh;
   width: 61.5vw;
   margin-left: 18.5vw;
   text-align: left;
   padding-left: 1vw;
   color: whitesmoke;
-  height: 12vh;
+  height: 14vh;
   overflow: auto;
   vertical-align: middle;
-}
-
-.suggestion {
-  /* display: inline-block; */
-  
+  background-color: #909090;
 }
 
 .movie-input {
@@ -113,7 +59,6 @@
   flex-direction: row;
   margin-left: 8vw;
   margin-top: 1vh;
-  /* width: 0vw; */
 }
 
 .movie-recommendation-list-item {
@@ -124,46 +69,63 @@
   flex-direction: row;
   display: inline-block;
   padding-left: .5vw;
-  height: 20vh;
+  height: 17vh;
   overflow: auto;
   vertical-align: middle;
+  overflow: hidden;
+  background-color: #909090;
+}
+
+.recommender-image {
+  width: 5vw;
+  height: 11vh;
+  margin: auto;
+  margin-top: 2vh;
 }
 
 .recommendation-name {
   display: inline-block;
-  margin-top: -12vh;
+  margin-top: -19vh;
   position: relative;
-  margin-left: 1vw;
+  margin-left: 6vw;
   font-weight: bold;
   vertical-align: middle;
+  width: 20vw;
+}
+
+.rating-length-row {
+  margin: 0;
+  padding: 0;
+  margin-top: -19vh;
+  margin-left: 6vw;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  width: 20vw;
 }
 
 .recommendation-rating {
-  display: inline-block;
-  margin-top: -10vh;
-  position: relative;
-  margin-left: 6vw;
-
   vertical-align: middle;
+  display: inline-block;
+  position: relative;
 }
 
 .recommendation-length {
   display: inline-block;
-  margin-top: -10vh;
-  position: relative;
-  margin-left: 12vw;
-
+  position: absolute;
+  margin-left: 11vw;
   vertical-align: middle;
 }
 
-.recommendation-rated {
-  display: inline-block;
+.rated-year-row {
+  margin: 0;
+  padding: 0;
   margin-top: -5vh;
-  position: absolute;
-  margin-left: 20vw;
-  /* margin-right: 0vw; */
-
+  margin-left: 0vw;
+  display: inline-block;
+  position: relative;
   vertical-align: middle;
+  width: 27vw;
 }
 
 .recommendation-year {
@@ -174,20 +136,52 @@
   vertical-align: middle;
 }
 
-.recommendation-plot {
+.recommendation-rated {
   display: inline-block;
   margin-top: -5vh;
-  position: relative;
-  margin-left: 0vw;
-  width: 26vw;
+  position: absolute;
+  margin-left: 20vw;
   vertical-align: middle;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.suggestion-image {
+  width: 6vw;
+  height: 13vh;
+  margin: auto;
+  margin-top: 0.5vh;
+}
+
+.loader {
+  margin-top: 20vh;
+}
+
+@media only screen and (orientation: portrait) {
+  .movie-recommendation-list-item {
+    width: 27vw;
+    margin-right: 1vw;
+    border: 0.1vw solid lightgrey;
+    color: white;
+    height: 20vh;
+    text-align: center;
   }
-  to {
-    transform: rotate(360deg);
+
+  .recommender-image {
+    width: 20vw;
+    height: 18vh;
+    margin-top: 1vh;
+  }
+
+  .suggestion-image {
+    width: 15vw;
+    height: 11vh;
+    margin-top: 1.5vh;
+    margin-bottom: 0;
+    display: inline-block;
+  }
+
+  .suggestion-text {
+    width: 45vw;
+    margin-left: 15vw;
+    text-align: center;
   }
 }

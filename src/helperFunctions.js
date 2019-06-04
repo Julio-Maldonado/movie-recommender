@@ -65,7 +65,11 @@ let cos = (m1, m2) => {
   
   scores.push((writerIntersection.length * 1.5) / (m1Writer.length + m2Writer.length))
   
+  let m1Title = m1['Title'].split(" ")
+  let m2Title = m2['Title'].split(" ")
+  let titleIntersection = m1Title.filter(value => -1 !== m2Title.indexOf(value))
   
+  scores.push((titleIntersection.length * 1.5) / (m1Title.length + m2Title.length))
 
   return scores.reduce((a, b) => a + b)
 }
