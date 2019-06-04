@@ -47,7 +47,20 @@ def pull_imdb_data():
 
     movie_file.write("]")
 
+def pull_lalaland_data():
+    movie_ID = 'tt1882671'
+    url = "https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + movie_ID + "&type=movie&r=json&plot=full"
+    response = requests.get(
+        url,
+        headers={
+            "X-RapidAPI-Host" : "movie-database-imdb-alternative.p.rapidapi.com",
+            "X-RapidAPI-Key" : "fbf74d9705mshea988d1a1a1c8bdp1538dcjsn804db37f831c"
+        }
+    )
+    pretty_json = json.dumps(response.json(), indent=2)
+    print(pretty_json)
+
 if __name__== "__main__":
-    pull_imdb_data()
+    pull_lalaland_data()
 
 # run through 2017, 2018, and 2019 movies :)
