@@ -6,6 +6,41 @@ import Loader from 'react-loader-spinner'
 import {compare, computeNineSimilarMovies} from './helperFunctions'
 import './App.css'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import faGithub from '@fortawesome/fontawesome-free-brands/faGithub';
+import faFacebook from '@fortawesome/fontawesome-free-brands/faFacebookF';
+import faInstagram from '@fortawesome/fontawesome-free-brands/faInstagram';
+import faLinkedinIn from '@fortawesome/fontawesome-free-brands/faLinkedinIn';
+import faEnvelope from '@fortawesome/fontawesome-free-regular/faEnvelope';
+
+const data = [
+	{
+	  link: 'https://github.com/Julio-Maldonado',
+	  label: 'Github',
+	  icon: faGithub,
+	},
+	{
+	  link: 'https://www.facebook.com/julio.maldonado.904',
+	  label: 'Facebook',
+	  icon: faFacebook,
+	},
+	{
+	  link: 'https://www.instagram.com/_julio_maldonado/',
+	  label: 'Instagram',
+	  icon: faInstagram,
+	},
+	{
+	  link: 'https://www.linkedin.com/in/juliom72/',
+	  label: 'LinkedIn',
+	  icon: faLinkedinIn,
+	},
+	{
+	  link: 'mailto:julio.maldonado.guzman@gmail.com',
+	  label: 'Email',
+	  icon: faEnvelope,
+	},
+];
+
 let sleep = (ms) => { return new Promise(resolve => setTimeout(resolve, ms))}
 
 class App extends Component {
@@ -108,7 +143,7 @@ class App extends Component {
           {this.state.step === 2 ? ` These movies are similar to ${this.state.movie.Title} - click on one to see it's IMDb page!` : ""}
         </h2>
         {this.state.step !== 2 ?
-          <div>
+          <div className="main-container">
             <input
               className="movie-input"
               placeholder="Search for..."
@@ -127,7 +162,7 @@ class App extends Component {
             />
           </div>
            :
-          <div>
+          <div className="main-container">
             <button onClick={() => this.updateStep()} >
               Search a different movie!
             </button>
@@ -138,6 +173,22 @@ class App extends Component {
             />
           </div>
         }
+        <div id="footer" >
+          <ul className="icons-ul">
+              {data.map(s => (
+                  <li key={s.label}>
+                    <a href={s.link} target="_blank" rel="noopener noreferrer">
+                      <FontAwesomeIcon icon={s.icon} />
+                    </a>
+                  </li>
+              ))}
+          </ul>
+          <p className="copyright">
+            <a href={"https://juliomaldonado.com"} target="_blank" rel="noopener noreferrer">
+              juliomaldonado.com
+            </a>
+          </p>
+      </div>
         {this.state.loading ? 
           <div className="loader">
             <Loader

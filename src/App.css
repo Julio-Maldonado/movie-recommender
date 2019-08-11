@@ -155,6 +155,50 @@
   margin-top: 20vh;
 }
 
+.main-container {
+  flex-grow: 1;
+  /* margin-top: auto; */
+
+}
+
+/* UPDATE STYLINGS TO USE RELATIVE AND CENTER ALL*/
+#footer {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+}
+
+.icons-ul {
+  margin-bottom: 0;
+  width: 100vw;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: inline;
+  *display: inline;
+  *zoom: 1;
+}
+
+li a {
+  white-space: nowrap;
+  color: black;
+}
+
+li:after {
+  content: " ";
+  letter-spacing: 1em;
+  background: center center no-repeat url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwAAADsABataJCQAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xMkMEa+wAAAAnSURBVBhXY/Dz89MA4sNA/B9Ka4AEYQIwfBgkiCwAxjhVopnppwEApxQqhnyQ+VkAAAAASUVORK5CYII=);
+}
+
+.copyright {
+  margin: 0;
+}
+
 @media only screen and (orientation: portrait) {
   .movie-recommendation-list-item {
     width: 27vw;
@@ -183,5 +227,52 @@
     width: 45vw;
     margin-left: 15vw;
     text-align: center;
+  }
+
+  .main-container {
+    flex-grow: 0;
+    /* margin-top: auto; */
+  }
+
+  .App {
+    height: 110vh;
+  }
+
+  /* UPDATE STYLINGS TO USE RELATIVE AND CENTER ALL*/
+  #footer {
+    position: absolute;
+    top: 100vh;
+    left: 50%;
+    bottom: 0px;
+    transform: translate(-50%, -50%);
+  }
+
+  .icons-ul {
+    margin-bottom: 0;
+    width: 100vw;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+
+  .copyright {
+    margin: 0;
+  }
+
+  li {
+    display: inline;
+    *display: inline;
+    *zoom: 1;
+  }
+  
+  li a {
+    white-space: nowrap;
+    color: black;
+  }
+  
+  li:after {
+    content: " ";
+    letter-spacing: 1em;
+    background: center center no-repeat url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwAAADsABataJCQAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xMkMEa+wAAAAnSURBVBhXY/Dz89MA4sNA/B9Ka4AEYQIwfBgkiCwAxjhVopnppwEApxQqhnyQ+VkAAAAASUVORK5CYII=);
   }
 }
